@@ -7,6 +7,7 @@ function getResults() {
     var additional   = parseFloat($("#additional-input").val().trim());
     var args = {
     	label: label,
+    	currentprincipal: currentPrincipal,
     	mpayment: monthlyPayment,
     	interestrate: interestRate,
     	additional: additional
