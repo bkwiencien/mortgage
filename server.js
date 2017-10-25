@@ -5,7 +5,7 @@ var methodOverride = require('method-override');
 var app = express();
 console.log("directory = " + __dirname);
 app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/public/assets/javascript/send.js'));
+app.use(express.static(__dirname + '/public/assets/javascript'));
 
 var PORT = process.env.PORT || 9000;
 
