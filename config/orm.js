@@ -9,7 +9,7 @@ connection.connect(function(err) {
 
 var orm = {
   selectAll: function(tableName,cb){  
-  connection.query('select  * from burgers', function(err, result) {
+  connection.query('select  * from ledger', function(err, result) {
       if (err) throw err;
       cb(result);
   });
