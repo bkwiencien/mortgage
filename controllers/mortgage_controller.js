@@ -29,13 +29,18 @@ function doCalculations(argo) {
     interestRate = parseFloat(argo.interestrate);
     additionalPrincipal = parseFloat(argo.additional);
     console.log("in doCalculations label " + currentPrincipal + " " + interestRate);
-    while (paymentNumber < 10) {
-        inter = parseFloat((currentPrincipal * interestRate));
-        interByMonth = parseFloat(inter/12.0);
-        currentPrincipal = (currentPrincipal + interByMonth);
-        currentPrincipal = currentPrincipal - monthlyPayment - additionalPrincipal;
-        paymentNumber++;
-        console.log(paymentNumber+ " " + currentPrincipal + " " + monthlyPayment + " "+ additionalPrincipal);
+    while (currentPrincipal > 0) {
+        if ((monthlyPayment + additionalPrincipal) > currentPrincipal) {
+            paymentNumber++;
+            currentPrincipal = 0; 
+        }else {
+          inter = parseFloat((currentPrincipal * interestRate));
+          interByMonth = parseFloat(inter/12.0);
+          currentPrincipal = (currentPrincipal + interByMonth);
+          currentPrincipal = currentPrincipal - monthlyPayment - additionalPrincipal;
+          paymentNumber++;
+          console.log(paymentNumber+ " " + currentPrincipal + " " + monthlyPayment + " "+ additionalPrincipal);
+        }
     }
 }
 
