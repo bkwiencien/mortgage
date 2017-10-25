@@ -5,6 +5,9 @@ var path = require("path");
 
 router.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));
+    //console.log("i will send javascript too");
+   // res.sendFile(path.join(__dirname + "/../public/assets/javascript/send.js"));
+   // console.log("it was sent");
 });
 
 router.post('/create', function (req, res) {

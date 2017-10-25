@@ -3,7 +3,9 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 var app = express();
-app.use(express.static(__dirname + '/public'));
+console.log("directory = " + __dirname);
+app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public/assets/javascript/send.js'));
 
 var PORT = process.env.PORT || 9000;
 
