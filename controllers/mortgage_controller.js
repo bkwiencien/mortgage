@@ -15,17 +15,28 @@ router.post('/calculate', function (req, res) {
 });
 
 function doCalculations(argo) {
+    var inter = 0;
+    var interByMonth = 0;
     var myLabel = "";
+    var paymentNumber = 0;
     var currentPrincipal = 0;
     var monthlyPayment = 0;
     var interestRate = 0;
     var additionalPrincipal = 0;
     myLabel = argo.label;
-    currentPrincipal = argo.currentprincipal;
-    monthlyPayment = argo.mpayment;
-    interestRate = argo.interestrate;
-    additionalPrincipal = argo.additional;
-    console.log("in doCalculations label " + myLabel);
+    currentPrincipal = parseFloat(argo.currentprincipal);
+    monthlyPayment = parseFloat(argo.mpayment);
+    interestRate = parseFloat(argo.interestrate);
+    additionalPrincipal = parseFloat(argo.additional);
+    console.log("in doCalculations label " + currentPrincipal + " " + interestRate);
+    while (paymentNumber < 10) {
+        inter = parseFloat((currentPrincipal * interestRate));
+        interByMonth = parseFloat(inter/12.0);
+        currentPrincipal = (currentPrincipal + interByMonth);
+        currentPrincipal = currentPrincipal - monthlyPayment - additionalPrincipal;
+        paymentNumber++;
+        console.log(paymentNumber+ " " + currentPrincipal + " " + monthlyPayment + " "+ additionalPrincipal);
+    }
 }
 
 module.exports = router;
