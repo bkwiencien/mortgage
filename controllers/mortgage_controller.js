@@ -9,23 +9,23 @@ router.get('/', function (req, res) {
 });
 
 router.post('/calculate', function (req, res) {
+    console.log("in mortgage_controller.post " + req.body.label);
+    doCalculations(req.body);
+    res.redirect('/');
+});
+
+function doCalculations(argo) {
     var myLabel = "";
     var currentPrincipal = 0;
     var monthlyPayment = 0;
     var interestRate = 0;
     var additionalPrincipal = 0;
-    myLabel = req.body.label;
-    currentPrincipal = req.body.currentprincipal;
-    monthlyPayment = req.body.mpayment;
-    interestRate = req.body.interestrate;
-    additionalPrincipal = req.body.additional;
-    console.log("in mortgage_controller.post " + req.body.label);
-    doCalculations();
-    res.redirect('/');
-});
-
-function doCalculations() {
-    console.log("in doCalculations");
+    myLabel = argo.label;
+    currentPrincipal = argo.currentprincipal;
+    monthlyPayment = argo.mpayment;
+    interestRate = argo.interestrate;
+    additionalPrincipal = argo.additional;
+    console.log("in doCalculations label " + myLabel);
 }
 
 module.exports = router;
