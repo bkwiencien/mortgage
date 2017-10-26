@@ -15,6 +15,19 @@ router.post('/calculate', function (req, res) {
 });
 
 function doCalculations(argo) {
+    var rows = [];
+    var row = {
+         paymentnumber: 0,
+         principal:     0,
+         interest:      0,
+         monthlypayment: 0
+    };
+    function Row(ppaymentnumber,pprincipal,pinterest,pmonthlypayment) {
+      this.paymentnumber = ppaymentnumber;
+      this.principal = pprincipal;
+      this.interest = pinterest;
+      this.monthlypayment = pmonthlypayment;
+    };
     var inter = 0;
     var interByMonth = 0;
     var myLabel = "";
@@ -23,6 +36,7 @@ function doCalculations(argo) {
     var monthlyPayment = 0;
     var interestRate = 0;
     var additionalPrincipal = 0;
+    var totalInterest = 0;
     myLabel = argo.label;
     currentPrincipal = parseFloat(argo.currentprincipal);
     monthlyPayment = parseFloat(argo.mpayment);
@@ -32,13 +46,21 @@ function doCalculations(argo) {
     while (currentPrincipal > 0) {
         if ((monthlyPayment + additionalPrincipal) > currentPrincipal) {
             paymentNumber++;
+            inter = parseFloat((currentPrincipal*interestRate));
+            interByMonth = parseFloat(inter/12.0);
+            totalInterest = totalInterest + interByMonth;
             currentPrincipal = 0; 
+            var rr = new Row(paymentNumber,currentPrincipal,interByMonth,monthlyPayment+additionalPrincipal);
+            rows.push(rr);
         }else {
           inter = parseFloat((currentPrincipal * interestRate));
           interByMonth = parseFloat(inter/12.0);
-          currentPrincipal = (currentPrincipal + interByMonth);
+          currentPrincipal = parseFloat((currentPrincipal + interByMonth));
           currentPrincipal = currentPrincipal - monthlyPayment - additionalPrincipal;
+          currentPrincipal = Math.round(currentPrincipal,-2);
           paymentNumber++;
+          var rrr = new Row(paymentNumber,currentPrincipal,interByMonth,monthlyPayment+additionalPrincipal);
+            rows.push(rrr);
           console.log(paymentNumber+ " " + currentPrincipal + " " + monthlyPayment + " "+ additionalPrincipal);
         }
     }
