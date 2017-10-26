@@ -10,8 +10,13 @@ router.get('/', function (req, res) {
 
 router.post('/calculate', function (req, res) {
     console.log("in mortgage_controller.post " + req.body.label);
-    doCalculations(req.body);
-    res.redirect('/');
+    array = doCalculations(req.body);
+    for(i=0;i<array.length;i++) {
+      queries.insertOne(array[i],function(data){
+        var i =0;
+    })
+
+};
 });
 
 function doCalculations(argo) {
@@ -64,6 +69,7 @@ function doCalculations(argo) {
           console.log(paymentNumber+ " " + currentPrincipal + " " + monthlyPayment + " "+ additionalPrincipal);
         }
     }
+    return(rows);
 }
 
 module.exports = router;

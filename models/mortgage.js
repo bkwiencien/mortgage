@@ -15,7 +15,15 @@ var mortgageQueries = {
     orm.updateOne(burgerId, function (res){
       cb(res);
     })
-  }
-};
+  },
+  insertAll: function (rows,cb) {
+    for (j=0;j<rows.length;j++) {
+      var rr = rows[j];
+      orm.insertOne(rr,function(res){
+      //  cb(res);
+      })
+    }
+    }
+  };
 
 module.exports = mortgageQueries;

@@ -9,7 +9,7 @@ var connection;
   port: 3306,
   user:'root',
   password: 'h3ckl3r',
-  database:'burgers_db'
+  database:'mortgage_db'
 })
 }; 
  
